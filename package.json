@@ -1,0 +1,12 @@
+{
+  "name": "blockbench-outliner-path",
+  "version": "1.0.0",
+  "author": "karakufire",
+  "description": "XPath evaluating function on Blockbench Outliner.",
+  "main": "outliner-path.js",
+  "scripts": {},
+  "license": "ISC",
+  "devDependencies": {
+    "blockbench-types": "^4.9.0"
+  }
+}
