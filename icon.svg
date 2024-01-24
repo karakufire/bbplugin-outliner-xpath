@@ -1,0 +1,15 @@
+<svg
+   width="64"
+   height="64"
+   viewBox="0 0 64 64"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+   <path
+      d="m 31.947266,12 -14,40 H 24 L 38,12 Z"
+   />
+   <path
+      d="m 16,42 a 4,4 0 0 1 -4,4 4,4 0 0 1 -4,-4 4,4 0 0 1 4,-4 4,4 0 0 1 4,4 z" />
+   <path
+      d="m 38,28 v 2 h 2 v -2 z m 4,0 v 2 h 2 v -2 z m 4,0 v 2 h 2 v -2 z m 4,0 v 2 h 2 v -2 z m 4,0 v 2 h 2 v -2 z m -16,4 v 2 h 2 v -2 z m 16,0 v 2 h 2 v -2 z m -16,4 v 2 h 2 v -2 z m 16,0 v 2 h 2 v -2 z m -16,4 v 2 h 2 v -2 z m 16,0 v 2 h 2 v -2 z m -16,4 v 2 h 2 v -2 z m 4,0 v 2 h 2 v -2 z m 4,0 v 2 h 2 v -2 z m 4,0 v 2 h 2 v -2 z m 4,0 v 2 h 2 v -2 z"
+   />
+</svg>

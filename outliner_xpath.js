@@ -1,9 +1,9 @@
 (function () {
     /**
- * @private
- * @param {OutlinerNode} node 
- * @param {Document} doc 
- */
+     * @private
+     * @param {OutlinerNode} node 
+     * @param {Document} doc 
+     */
     function toDOM(node, doc) {
         if (!(doc instanceof Document)) throw -1;
         if (!(node instanceof OutlinerNode)) throw -1;
@@ -43,7 +43,7 @@
          * 
          * @param {string} name 
          * @param {string} alt 
-        */
+         */
         const setVec3ArrAttributeIfExists = (name, alt) => {
             if (node[name] instanceof Array && node[name].length == 3) {
                 const attr = doc.createAttribute(alt || name);
@@ -86,10 +86,10 @@
     }
 
 
-    BBPlugin.register('outliner-xpath', {
+    BBPlugin.register('outliner_xpath', {
         title: 'Blockbench Outliner XPath API',
         author: 'karakufire',
-        icon: 'Search',
+        icon: "icon.svg",
         description: 'Provides an API what allows us to retrieve outliner-node(s) with x-path. This aims to help such as batch processing of outliner-nodes that match the criteria.',
         about: [
             "**Blockbench Outliner XPath API** adds the functions to Outliner instace to search Outliner Nodes with XPath.",
