@@ -5,8 +5,8 @@
      * @param {Document} doc 
      */
     function toDOM(node, doc) {
-        if (!(doc instanceof Document)) throw -1;
-        if (!(node instanceof OutlinerNode)) throw -1;
+        if (!(doc instanceof Document)) throw new TypeError("doc should be Document instance");
+        if (!(node instanceof OutlinerNode)) throw new TypeError("node should be OutlinerNode instance");
         const elem = doc.createElement(`${node.name}`);
 
         const type = doc.createAttribute("type");
@@ -133,14 +133,21 @@
             }
 
             Outliner.evaluate = function (xpath, context) {
-                if (context instanceof OutlinerNode) context = Outliner.domImage.evaluate(`//*[@id="${context.uuid}"]`, Outliner.domImage).iterateNext();
-                else if (typeof context === "string") context = Outliner.domImage.evaluate(`//*[@id="${context}"]`).iterateNext();
-                else if (context != null) throw "Illegal Context";
-                else context = Outliner.domImage;
+                const eval = /** @param {string} path @return XPathResult*/ (path) => Outliner.domImage.evaluate(path, Outliner.domImage);
+                let /** @type Node */ contextNode;
+                if (context instanceof OutlinerNode)
+                    contextNode = eval(`//*[@id="${context.uuid}"]`).iterateNext();
+                else if (context == "root" || context === Outliner.root)
+                    contextNode = eval("/root").iterateNext();
+                else if (/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i.test(context))
+                    contextNode = eval(`//*[@id="${context}"]`).iterateNext();
+                else if (context == null)
+                    contextNode = Outliner.domImage;
+                else throw new TypeError("Illegal context given. context should be OutlinerNode instance, \"root\", Outliner.root or uuid string.");
 
                 const givenXPath = new XPathEvaluator().createExpression(xpath);
-                const result = givenXPath.evaluate(context);
-                const ids = [];
+                const result = givenXPath.evaluate(contextNode);
+                const /** @type string[] */ ids = [];
                 for (let node = result.iterateNext(); node != null; node = result.iterateNext()) {
                     node.id && ids.push(node.id);
                 }
