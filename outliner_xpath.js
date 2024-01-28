@@ -1,3 +1,5 @@
+/// <reference path="outliner_xpath.d.ts" />
+
 (function () {
     /**
      * @private
@@ -96,7 +98,7 @@
             "With the addition of this function, the functions to snapshot Outliner as DOM and to retrieve OutlinerNode instances by UUID are also added.",
             "Because this plugin is focused to add those console functions, this plugin will not add any actions evoked via user interface."
         ].join("<br>"),
-        version: '1.0.0',
+        version: '1.1.0',
         variant: 'both',
         onload() {
             Object.defineProperty(Outliner, 'allNodes', {
