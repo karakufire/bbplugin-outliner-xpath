@@ -34,7 +34,7 @@
         const setVec2ArrAttributeIfExists = (name, alt) => {
             if (node[name] instanceof Array && node[name].length == 2) {
                 const attr = doc.createAttribute(alt || name);
-                attr.value = `[${node[name][0]},${node[name][1]}]`;
+                attr.value = JSON.stringify(node[name]);
                 elem.setAttributeNode(attr);
             }
         };
@@ -47,7 +47,7 @@
         const setVec3ArrAttributeIfExists = (name, alt) => {
             if (node[name] instanceof Array && node[name].length == 3) {
                 const attr = doc.createAttribute(alt || name);
-                attr.value = `[${node[name][0]},${node[name][1]},${node[name][2]}]`;
+                attr.value = JSON.stringify(node[name]);
                 elem.setAttributeNode(attr);
             }
         };
@@ -73,8 +73,8 @@
         setAttributeIfExists("color");
         if (node["from"] instanceof Array && node["to"] instanceof Array && node["from"].length == 3 && node["to"].length == 3) {
             const sAttr = doc.createAttribute("size");
-            const size = [node["from"][0] - node["to"][0], node["from"][1] - node["to"][1], node["from"][2] - node["to"][2]]
-            size.values = `[${size[0]},${size[1]},${size[2]}]`;
+            const size = [node["to"][0] - node["from"][0], node["to"][1] - node["from"][1], node["to"][2] - node["from"][2]].map(Math.abs);
+            sAttr.value = JSON.stringify(size);
             elem.setAttributeNode(sAttr);
         }
 
@@ -137,13 +137,13 @@
                 let /** @type Node */ contextNode;
                 if (context instanceof OutlinerNode)
                     contextNode = eval(`//*[@id="${context.uuid}"]`).iterateNext();
-                else if (context == "root" || context === Outliner.root)
+                else if (context === Outliner.root)
                     contextNode = eval("/root").iterateNext();
                 else if (/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i.test(context))
                     contextNode = eval(`//*[@id="${context}"]`).iterateNext();
-                else if (context == null)
+                else if (context == null || context === Outliner)
                     contextNode = Outliner.domImage;
-                else throw new TypeError("Illegal context given. context should be OutlinerNode instance, \"root\", Outliner.root or uuid string.");
+                else throw new TypeError("Illegal context given. context should be OutlinerNode instance, Outliner, Outliner.root or uuid string.");
 
                 const givenXPath = new XPathEvaluator().createExpression(xpath);
                 const result = givenXPath.evaluate(contextNode);
